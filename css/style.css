@@ -326,54 +326,43 @@ nav a:hover::after{width:100%}
 
 /* PORTFOLIO */
 .portfolio{
-    padding:20px 10% 130px;
+    padding:20px 10% 150px;
     background:#0d0d0d;
 }
 
-/* PROMÓ SÁV */
-.promo-banner{
-    max-width:700px;
-    margin:0 auto 60px;
+/* PORTFÓLIÓ ÉPÍTÉSE ALATT — ideiglenes felhívás kép-rács helyett */
+.portfolio-building{
+    max-width:640px;
+    margin:0 auto;
     text-align:center;
-    padding:36px 30px;
-    border:1px solid #C8A96A;
-    background:rgba(200,169,106,.06);
+    padding:70px 50px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(200,169,106,.04);
 }
-.promo-star{
-    display:block;
-    color:#C8A96A;
-    font-size:1.1rem;
-    margin-bottom:14px;
-    letter-spacing:4px;
+.portfolio-building-icon{
+    width:48px;
+    height:48px;
+    margin-bottom:28px;
 }
-.promo-banner p{
+.portfolio-building h3{
     font-family:"Cormorant Garamond",serif;
-    font-style:italic;
-    font-size:1.5rem;
-    color:#fff;
-    margin-bottom:24px;
-    line-height:1.4;
-}
-.promo-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:220px;
-    height:52px;
-    background:#C8A96A;
-    color:#111;
     font-weight:600;
-    letter-spacing:.5px;
-    transition:.35s;
+    font-size:clamp(1.6rem,3vw,2.1rem);
+    margin-bottom:20px;
+    color:#fff;
 }
-.promo-btn:hover{
-    background:transparent;
+.portfolio-building p{
+    color:#bbb;
+    line-height:1.8;
+    margin-bottom:34px;
+    font-size:1rem;
+}
+.portfolio-building p strong{
     color:#C8A96A;
-    transform:translateY(-3px);
+    font-weight:600;
 }
 @media(max-width:600px){
-.promo-banner{padding:28px 20px;margin-bottom:44px}
-.promo-banner p{font-size:1.25rem}
+.portfolio-building{padding:50px 26px}
 }
 .portfolio-grid{
     display:grid;
