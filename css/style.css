@@ -329,6 +329,52 @@ nav a:hover::after{width:100%}
     padding:20px 10% 130px;
     background:#0d0d0d;
 }
+
+/* PROMÓ SÁV */
+.promo-banner{
+    max-width:700px;
+    margin:0 auto 60px;
+    text-align:center;
+    padding:36px 30px;
+    border:1px solid #C8A96A;
+    background:rgba(200,169,106,.06);
+}
+.promo-star{
+    display:block;
+    color:#C8A96A;
+    font-size:1.1rem;
+    margin-bottom:14px;
+    letter-spacing:4px;
+}
+.promo-banner p{
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-size:1.5rem;
+    color:#fff;
+    margin-bottom:24px;
+    line-height:1.4;
+}
+.promo-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:220px;
+    height:52px;
+    background:#C8A96A;
+    color:#111;
+    font-weight:600;
+    letter-spacing:.5px;
+    transition:.35s;
+}
+.promo-btn:hover{
+    background:transparent;
+    color:#C8A96A;
+    transform:translateY(-3px);
+}
+@media(max-width:600px){
+.promo-banner{padding:28px 20px;margin-bottom:44px}
+.promo-banner p{font-size:1.25rem}
+}
 .portfolio-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -597,4 +643,42 @@ nav a:hover::after{width:100%}
 }
 @media(max-width:560px){
 .form-row{grid-template-columns:1fr}
+}
+
+/* SCROLL REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+.reveal-left{
+    transform:translateX(-40px);
+}
+.reveal-right{
+    transform:translateX(40px);
+}
+.reveal.in-view{
+    opacity:1;
+    transform:translateY(0) translateX(0);
+}
+
+/* apró egymás utáni késleltetés a kártyáknál/rácsos elemeknél */
+.services-grid .reveal:nth-child(2){transition-delay:.12s}
+.services-grid .reveal:nth-child(3){transition-delay:.24s}
+.portfolio-grid .reveal:nth-child(2){transition-delay:.06s}
+.portfolio-grid .reveal:nth-child(3){transition-delay:.12s}
+.portfolio-grid .reveal:nth-child(4){transition-delay:.18s}
+.portfolio-grid .reveal:nth-child(5){transition-delay:.24s}
+.portfolio-grid .reveal:nth-child(6){transition-delay:.3s}
+.portfolio-grid .reveal:nth-child(7){transition-delay:.36s}
+.portfolio-grid .reveal:nth-child(8){transition-delay:.42s}
+.portfolio-grid .reveal:nth-child(9){transition-delay:.48s}
+
+/* akinek "reduced motion" van beállítva a rendszerén, annak ne animáljunk */
+@media (prefers-reduced-motion: reduce){
+.reveal{
+    opacity:1;
+    transform:none;
+    transition:none;
+}
 }
