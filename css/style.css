@@ -634,21 +634,24 @@ nav a:hover::after{width:100%}
 .form-row{grid-template-columns:1fr}
 }
 
-/* SCROLL REVEAL */
-.reveal{
+/* SCROLL REVEAL — csak akkor rejt el bármit, ha a JS ténylegesen fut és
+   sikeresen jelezte, hogy kész animálni (html.js-ready osztály). Így ha a
+   JS bármi okból nem fut le, a tartalom simán, animáció nélkül látszik,
+   nem tűnik el. */
+html.js-ready .reveal{
     opacity:0;
     transform:translateY(36px);
     transition:opacity .8s ease, transform .8s ease;
 }
-.reveal-left{
+html.js-ready .reveal-left{
     transform:translateX(-40px);
 }
-.reveal-right{
+html.js-ready .reveal-right{
     transform:translateX(40px);
 }
 .reveal.in-view{
-    opacity:1;
-    transform:translateY(0) translateX(0);
+    opacity:1 !important;
+    transform:translateY(0) translateX(0) !important;
 }
 
 /* apró egymás utáni késleltetés a kártyáknál/rácsos elemeknél */

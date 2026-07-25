@@ -4,6 +4,57 @@
 ========================================== */
 
 // =======================
+// SCROLL REVEAL ANIMÁCIÓ
+// =======================
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if(revealElements.length && "IntersectionObserver" in window){
+
+    // Csak most kapcsoljuk be a "rejtsd el induláskor" CSS-t — ha idáig
+    // eljutott a script, biztosan tudjuk animálni is.
+    document.documentElement.classList.add("js-ready");
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("in-view");
+                observer.unobserve(entry.target);
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.15,
+        rootMargin: "0px 0px -60px 0px"
+    });
+
+    revealElements.forEach(element => {
+
+        revealObserver.observe(element);
+
+    });
+
+    // Biztonsági háló: ha bármi okból (pl. az elem sosem kerül a
+    // viewportba, vagy az observer nem indul el megfelelően) egy elem
+    // 4 másodperc után sem vált láthatóvá, kényszerítsük ki.
+    setTimeout(() => {
+
+        revealElements.forEach(element => {
+
+            element.classList.add("in-view");
+
+        });
+
+    }, 4000);
+
+}
+
+// =======================
 // HAMBURGER MENU (mobil)
 // =======================
 
