@@ -370,7 +370,7 @@ nav a:hover::after{width:100%}
     grid-auto-rows:220px;
     gap:14px;
     max-width:1200px;
-    margin:0 auto;
+    margin:0 auto 70px;
 }
 .portfolio-item{
     position:relative;
@@ -400,6 +400,39 @@ nav a:hover::after{width:100%}
 .portfolio-item:hover img{
     transform:scale(1.06);
 }
+
+/* ÜRES PORTFOLIO HELYEK — amíg nincs feltöltött kép */
+.portfolio-placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    border:1px dashed rgba(200,169,106,.35);
+    background:rgba(255,255,255,.015);
+    transition:.35s;
+}
+.portfolio-placeholder.tall{
+    grid-row:span 2;
+}
+.portfolio-placeholder svg{
+    width:32px;
+    height:32px;
+    opacity:.6;
+}
+.portfolio-placeholder span{
+    font-size:.75rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#888;
+}
+.portfolio-placeholder:hover{
+    border-color:#C8A96A;
+    background:rgba(200,169,106,.04);
+}
+.portfolio-placeholder:hover svg{
+    opacity:1;
+}
 @media(max-width:900px){
 .portfolio-grid{
     grid-template-columns:repeat(2,1fr);
@@ -411,7 +444,8 @@ nav a:hover::after{width:100%}
     grid-template-columns:1fr;
     grid-auto-rows:260px;
 }
-.portfolio-item.tall{grid-row:span 1}
+.portfolio-item.tall,
+.portfolio-placeholder.tall{grid-row:span 1}
 }
 
 /* LIGHTBOX */
