@@ -404,9 +404,49 @@ finalizeBtn.addEventListener("click", async () => {
 })();
 
 // ------------------------------------------
-// "Download All" — ZIP generálás egyelőre nincs bekötve (következő lépés)
+// "Download All" — ZIP letöltés
 // ------------------------------------------
 
-downloadAllBtn.addEventListener("click", () => {
-    alert("Bulk ZIP download is coming soon. For now, open each photo and download individually.");
+downloadAllBtn.addEventListener("click", async () => {
+
+    downloadAllBtn.disabled = true;
+    const originalText = downloadAllBtn.textContent;
+    downloadAllBtn.textContent = "Preparing ZIP...";
+
+    try {
+
+        const response = await fetch(`${API_BASE}/${currentAccessToken}/download-all`, {
+            headers: { "Authorization": `Bearer ${currentClientToken}` }
+        });
+
+        if (!response.ok) {
+
+            const data = await response.json().catch(() => ({}));
+            throw new Error(data.error || "Nem sikerült letölteni a ZIP fájlt.");
+
+        }
+
+        const blob = await response.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+
+        const tempLink = document.createElement("a");
+        tempLink.href = downloadUrl;
+        tempLink.download = `${galleryNameEl.textContent || "gallery"}.zip`;
+        document.body.appendChild(tempLink);
+        tempLink.click();
+        document.body.removeChild(tempLink);
+
+        window.URL.revokeObjectURL(downloadUrl);
+
+    } catch (error) {
+
+        alert(error.message);
+
+    } finally {
+
+        downloadAllBtn.disabled = false;
+        downloadAllBtn.textContent = originalText;
+
+    }
+
 });
