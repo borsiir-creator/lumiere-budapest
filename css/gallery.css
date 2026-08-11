@@ -1,0 +1,347 @@
+/* ==========================================
+   LUMIÈRE BUDAPEST — gallery.css
+   Ügyfél-galéria oldal
+========================================== */
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    font-family:"Inter",sans-serif;
+    background:#111;
+    color:#fff;
+    min-height:100vh;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+
+/* HEADER */
+.gallery-header{
+    padding:24px 6%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.gallery-logo{
+    display:inline-flex;
+    flex-direction:column;
+}
+.logo-script{
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-size:30px;
+    color:#C8A96A;
+    line-height:1;
+}
+.logo-city{
+    letter-spacing:5px;
+    text-transform:uppercase;
+    font-size:10px;
+    margin-top:2px;
+}
+
+/* SHARED */
+.eyebrow{
+    display:block;
+    color:#C8A96A;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:.8rem;
+    margin-bottom:14px;
+}
+.btn-primary,.btn-secondary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:200px;
+    height:52px;
+    padding:0 24px;
+    border:1px solid #C8A96A;
+    font-weight:600;
+    transition:.3s;
+}
+.btn-primary{
+    background:#C8A96A;
+    color:#111;
+}
+.btn-primary:hover{
+    background:transparent;
+    color:#fff;
+}
+.btn-primary:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+.btn-secondary{
+    color:#fff;
+}
+.btn-secondary:hover{
+    background:#C8A96A;
+    color:#111;
+}
+
+/* LOGIN VIEW */
+.login-view{
+    min-height:calc(100vh - 90px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 24px;
+}
+.login-box{
+    width:100%;
+    max-width:420px;
+    text-align:center;
+}
+.login-box h1{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:2.4rem;
+    margin-bottom:36px;
+}
+#loginForm{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    text-align:left;
+}
+#loginForm label{
+    font-size:.75rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:#999;
+    margin-top:14px;
+}
+#loginForm input{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid rgba(255,255,255,.2);
+    color:#fff;
+    padding:12px 4px;
+    font-size:1rem;
+    transition:.3s;
+}
+#loginForm input:focus{
+    outline:none;
+    border-bottom-color:#C8A96A;
+}
+#loginForm .btn-primary{
+    margin-top:28px;
+    border-radius:0;
+}
+.login-status{
+    min-height:22px;
+    font-size:.85rem;
+    margin-top:14px;
+    color:#e06666;
+}
+.login-status.success{
+    color:#C8A96A;
+}
+
+/* GALLERY VIEW */
+.gallery-view{
+    padding:50px 6% 100px;
+}
+.gallery-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:20px;
+    margin-bottom:40px;
+    padding-bottom:24px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.gallery-info h1{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:2rem;
+}
+.gallery-expiry{
+    display:block;
+    margin-top:6px;
+    font-size:.85rem;
+    color:#999;
+}
+.gallery-actions{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+.selection-count{
+    font-size:.9rem;
+    color:#C8A96A;
+    letter-spacing:.5px;
+}
+.gallery-actions .btn-primary,
+.gallery-actions .btn-secondary{
+    min-width:auto;
+    height:46px;
+    padding:0 22px;
+    font-size:.9rem;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:14px;
+}
+.gallery-thumb{
+    position:relative;
+    aspect-ratio:1;
+    overflow:hidden;
+    cursor:pointer;
+    background:#1a1a1a;
+}
+.gallery-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s ease;
+}
+.gallery-thumb:hover img{
+    transform:scale(1.05);
+}
+.gallery-thumb::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0);
+    transition:.3s;
+}
+.gallery-thumb:hover::after{
+    background:rgba(0,0,0,.15);
+}
+.thumb-selected-badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#C8A96A;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transform:scale(.7);
+    transition:.25s;
+}
+.gallery-thumb.is-selected .thumb-selected-badge{
+    opacity:1;
+    transform:scale(1);
+}
+.thumb-selected-badge svg{
+    width:16px;
+    height:16px;
+    stroke:#111;
+}
+
+.gallery-empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:80px 20px;
+    color:#888;
+}
+
+/* LIGHTBOX */
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(8,8,8,.97);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+}
+.lightbox.open{
+    display:flex;
+}
+.lightbox-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    max-width:90vw;
+}
+.lightbox-image{
+    max-width:88vw;
+    max-height:74vh;
+    object-fit:contain;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox-controls{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+.lightbox-counter{
+    font-size:.85rem;
+    color:#999;
+    letter-spacing:1px;
+}
+.lightbox-favorite{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:none;
+    border:1px solid rgba(255,255,255,.3);
+    color:#fff;
+    padding:10px 20px;
+    font-size:.85rem;
+    letter-spacing:.5px;
+    transition:.3s;
+}
+.lightbox-favorite svg{
+    width:18px;
+    height:18px;
+    transition:.3s;
+}
+.lightbox-favorite:hover{
+    border-color:#C8A96A;
+    color:#C8A96A;
+}
+.lightbox-favorite.is-selected{
+    background:#C8A96A;
+    border-color:#C8A96A;
+    color:#111;
+}
+.lightbox-favorite.is-selected svg{
+    fill:#111;
+    stroke:#111;
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next{
+    position:absolute;
+    background:none;
+    border:none;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+.lightbox-close{
+    top:28px;
+    right:38px;
+    font-size:38px;
+    line-height:1;
+}
+.lightbox-close:hover{color:#C8A96A}
+.lightbox-prev,.lightbox-next{
+    top:50%;
+    transform:translateY(-50%);
+    font-size:48px;
+    padding:10px 16px;
+}
+.lightbox-prev{left:20px}
+.lightbox-next{right:20px}
+.lightbox-prev:hover,
+.lightbox-next:hover{color:#C8A96A}
+
+@media(max-width:600px){
+.gallery-view{padding:30px 5% 80px}
+.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.gallery-topbar{flex-direction:column;align-items:flex-start}
+.lightbox-close{top:16px;right:20px;font-size:32px}
+.lightbox-prev,.lightbox-next{font-size:34px}
+.lightbox-controls{flex-direction:column;gap:12px}
+}

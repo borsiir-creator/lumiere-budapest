@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Client Gallery | Lumière Budapest</title>
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="css/gallery.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+</head>
+
+<body>
+
+<header class="gallery-header">
+
+    <a href="index.html" class="gallery-logo">
+        <span class="logo-script">Lumière</span>
+        <span class="logo-city">Budapest</span>
+    </a>
+
+</header>
+
+
+<!-- ===========================
+     LOGIN VIEW
+=========================== -->
+
+<section class="login-view" id="loginView">
+
+    <div class="login-box">
+
+        <span class="eyebrow">Client Gallery</span>
+
+        <h1>Access Your Photos</h1>
+
+        <form id="loginForm">
+
+            <label for="galleryToken">Gallery ID</label>
+            <input type="text" id="galleryToken" name="galleryToken" placeholder="e.g. 389ac4922850" required autocomplete="off">
+
+            <label for="galleryPassword">Password</label>
+            <input type="password" id="galleryPassword" name="galleryPassword" placeholder="••••••••" required autocomplete="off">
+
+            <button type="submit" class="btn-primary">Enter Gallery</button>
+
+            <p class="login-status" id="loginStatus"></p>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ===========================
+     GALLERY VIEW (bejelentkezés után jelenik meg)
+=========================== -->
+
+<section class="gallery-view" id="galleryView" hidden>
+
+    <div class="gallery-topbar">
+
+        <div class="gallery-info">
+            <h1 id="galleryName">—</h1>
+            <span class="gallery-expiry" id="galleryExpiry"></span>
+        </div>
+
+        <div class="gallery-actions">
+
+            <span class="selection-count" id="selectionCount" hidden>0 selected</span>
+
+            <button class="btn-primary" id="finalizeBtn" hidden>Finalize Selection</button>
+
+            <button class="btn-secondary" id="downloadAllBtn" hidden>Download All (ZIP)</button>
+
+        </div>
+
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+        <!-- ide kerülnek a fotók JS-ből -->
+    </div>
+
+</section>
+
+
+<!-- ===========================
+     LIGHTBOX
+=========================== -->
+
+<div class="lightbox" id="lightbox">
+
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+
+    <div class="lightbox-content">
+
+        <img src="" alt="" class="lightbox-image" id="lightboxImage">
+
+        <div class="lightbox-controls">
+
+            <span class="lightbox-counter" id="lightboxCounter"></span>
+
+            <button class="lightbox-favorite" id="lightboxFavorite" aria-label="Toggle selection">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 21s-7-4.5-9.5-9C.7 8.2 2 4.5 5.5 4c2-.3 3.6.7 4.5 2.1C10.9 4.7 12.5 3.7 14.5 4 18 4.5 19.3 8.2 17.5 12 15 16.5 12 21 12 21z"/>
+                </svg>
+                <span id="lightboxFavoriteLabel">Select</span>
+            </button>
+
+            <a class="lightbox-favorite" id="lightboxDownload" href="#" download hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/>
+                </svg>
+                <span>Download</span>
+            </a>
+
+        </div>
+
+    </div>
+
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
+
+</div>
+
+<script src="js/gallery.js"></script>
+
+</body>
+
+</html>
