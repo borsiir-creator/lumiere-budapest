@@ -5,6 +5,14 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+
+/* Ugyanaz a védelem, mint az admin.css-ben — a "hidden" attribútum
+   mindig érvényesüljön, még akkor is, ha a class külön display-t ad
+   (pl. .btn-primary { display:inline-flex }). */
+[hidden]{
+    display:none !important;
+}
+
 body{
     font-family:"Inter",sans-serif;
     background:#111;
