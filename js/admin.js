@@ -8,6 +8,7 @@ const GALLERY_PAGE_URL = "https://lumiere-budapest.com/gallery.html";
 let adminToken = null;
 let galleries = [];
 let currentDetailToken = null;
+let currentDetailGalleryType = null;
 let selectedFiles = [];
 
 // --- DOM elemek ---
@@ -292,11 +293,11 @@ async function openGalleryDetail(accessToken) {
 
     currentDetailToken = accessToken;
     const gallery = galleries.find(g => g.access_token === accessToken);
+    currentDetailGalleryType = gallery.type;
 
     detailGalleryName.textContent = gallery.name;
     detailGalleryMeta.textContent =
         `${gallery.customer_name} · ${gallery.type === "selection" ? "Selection" : "Final"} · ${gallery.photo_count} photos`;
-
     galleryDetail.hidden = false;
     galleryDetail.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -331,9 +332,21 @@ async function loadDetailPhotos() {
             return;
         }
 
+        // "Selection" típusú galériánál mutassuk, hány képet választott ki az ügyfél
+        if (currentDetailGalleryType === "selection") {
+            detailGalleryMeta.textContent += ` · ${data.selectionCount} selected by client`;
+        }
+
         detailPhotosGrid.innerHTML = data.photos.map(photo => `
-            <div class="detail-photo">
+            <div class="detail-photo${photo.selected ? " is-selected" : ""}">
                 <img src="${photo.thumbnailUrl}" alt="${escapeHtml(photo.original_filename)}" loading="lazy">
+                ${photo.selected ? `
+                    <div class="detail-photo-badge" title="Selected by client">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                ` : ""}
                 <span class="filename">${escapeHtml(photo.original_filename)}</span>
             </div>
         `).join("");
