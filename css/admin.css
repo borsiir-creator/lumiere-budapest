@@ -1,0 +1,324 @@
+/* ==========================================
+   LUMIÈRE BUDAPEST — admin.css
+========================================== */
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:"Inter",sans-serif;
+    background:#111;
+    color:#fff;
+    min-height:100vh;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+
+/* HEADER */
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:24px 6%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.admin-logo{display:inline-flex;flex-direction:column}
+.logo-script{
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-size:28px;
+    color:#C8A96A;
+    line-height:1;
+}
+.logo-city{
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:10px;
+    margin-top:2px;
+    color:#999;
+}
+
+/* SHARED */
+.eyebrow{
+    display:block;
+    color:#C8A96A;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:.8rem;
+    margin-bottom:14px;
+}
+.btn-primary,.btn-secondary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:140px;
+    height:46px;
+    padding:0 20px;
+    border:1px solid #C8A96A;
+    font-weight:600;
+    font-size:.9rem;
+    transition:.3s;
+    white-space:nowrap;
+}
+.btn-primary{background:#C8A96A;color:#111}
+.btn-primary:hover{background:transparent;color:#fff}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-secondary{color:#fff}
+.btn-secondary:hover{background:#C8A96A;color:#111}
+
+/* LOGIN VIEW */
+.login-view{
+    min-height:calc(100vh - 90px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 24px;
+}
+.login-box{width:100%;max-width:380px;text-align:center}
+.login-box h1{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:2.2rem;
+    margin-bottom:32px;
+}
+#loginForm{display:flex;flex-direction:column;gap:6px;text-align:left}
+#loginForm label{
+    font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:#999;margin-top:10px;
+}
+#loginForm input{
+    background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.2);
+    color:#fff;padding:12px 4px;font-size:1rem;transition:.3s;
+}
+#loginForm input:focus{outline:none;border-bottom-color:#C8A96A}
+#loginForm .btn-primary{margin-top:24px}
+.login-status{min-height:20px;font-size:.85rem;margin-top:12px;color:#e06666}
+
+/* DASHBOARD */
+.dashboard-view{padding:40px 6% 100px}
+.dashboard-topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:30px;flex-wrap:wrap;gap:16px;
+}
+.dashboard-topbar h1{
+    font-family:"Cormorant Garamond",serif;font-weight:500;font-size:2rem;
+}
+
+.galleries-table-wrap{
+    overflow-x:auto;
+    border:1px solid rgba(255,255,255,.08);
+}
+.galleries-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+.galleries-table th{
+    text-align:left;
+    font-size:.75rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#999;
+    padding:16px 18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.02);
+}
+.galleries-table td{
+    padding:16px 18px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:.9rem;
+}
+.galleries-table tbody tr{
+    cursor:pointer;
+    transition:.2s;
+}
+.galleries-table tbody tr:hover{
+    background:rgba(200,169,106,.06);
+}
+.status-badge{
+    display:inline-block;
+    padding:4px 10px;
+    font-size:.72rem;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    border:1px solid;
+}
+.status-active{color:#8fd19e;border-color:#8fd19e}
+.status-finalized{color:#C8A96A;border-color:#C8A96A}
+.status-expired{color:#888;border-color:#555}
+
+.galleries-empty{
+    padding:60px 20px;
+    text-align:center;
+    color:#888;
+}
+
+/* GALLERY DETAIL PANEL */
+.gallery-detail{
+    margin-top:40px;
+    border:1px solid rgba(255,255,255,.08);
+    padding:30px;
+}
+.detail-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:26px;
+    flex-wrap:wrap;
+    gap:14px;
+}
+.detail-header h2{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:1.6rem;
+}
+.detail-meta{
+    display:block;
+    margin-top:6px;
+    font-size:.85rem;
+    color:#999;
+}
+
+.upload-box{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:20px;
+    border:1px dashed rgba(200,169,106,.4);
+    margin-bottom:30px;
+}
+.upload-label{
+    flex:1;
+    min-width:220px;
+    cursor:pointer;
+    color:#ccc;
+    font-size:.9rem;
+}
+.upload-label:hover{color:#C8A96A}
+.upload-status{
+    width:100%;
+    font-size:.85rem;
+    color:#C8A96A;
+    min-height:18px;
+}
+
+.detail-photos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:12px;
+}
+.detail-photo{
+    aspect-ratio:1;
+    overflow:hidden;
+    background:#1a1a1a;
+    position:relative;
+}
+.detail-photo img{
+    width:100%;height:100%;object-fit:cover;
+}
+.detail-photo .filename{
+    position:absolute;
+    bottom:0;left:0;right:0;
+    padding:6px 8px;
+    background:rgba(0,0,0,.65);
+    font-size:.68rem;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* MODAL */
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(8,8,8,.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+.modal-box{
+    background:#161616;
+    border:1px solid rgba(255,255,255,.1);
+    width:100%;
+    max-width:460px;
+    padding:36px;
+}
+.modal-box h2{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:1.7rem;
+    margin-bottom:22px;
+}
+.modal-note{
+    font-size:.85rem;
+    color:#C8A96A;
+    margin-bottom:24px;
+}
+#newGalleryForm{display:flex;flex-direction:column;gap:4px}
+#newGalleryForm label{
+    font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#999;margin-top:12px;
+}
+#newGalleryForm input,
+#newGalleryForm select{
+    background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.2);
+    color:#fff;padding:10px 4px;font-size:.95rem;font-family:inherit;
+}
+#newGalleryForm select option{background:#111;color:#fff}
+#newGalleryForm input:focus,
+#newGalleryForm select:focus{outline:none;border-bottom-color:#C8A96A}
+.modal-actions{
+    display:flex;
+    gap:12px;
+    margin-top:26px;
+}
+.modal-actions .btn-primary,
+.modal-actions .btn-secondary{
+    flex:1;
+    min-width:auto;
+}
+.modal-status{
+    min-height:20px;
+    font-size:.85rem;
+    color:#e06666;
+    margin-top:12px;
+}
+
+.access-info-row{margin-bottom:20px}
+.access-info-label{
+    display:block;
+    font-size:.72rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#999;
+    margin-bottom:6px;
+}
+.access-info-value{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,.04);
+    padding:10px 14px;
+}
+.access-info-value code{
+    flex:1;
+    font-size:.85rem;
+    color:#C8A96A;
+    word-break:break-all;
+}
+.copy-btn{
+    background:none;
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;
+    padding:6px 12px;
+    font-size:.75rem;
+    transition:.3s;
+    white-space:nowrap;
+}
+.copy-btn:hover{border-color:#C8A96A;color:#C8A96A}
+#accessInfoModal .btn-primary{width:100%;margin-top:10px}
+
+@media(max-width:700px){
+.dashboard-view{padding:30px 5% 80px}
+.modal-box{padding:26px}
+}

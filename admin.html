@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin | Lumière Budapest</title>
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="css/admin.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+</head>
+
+<body>
+
+<header class="admin-header">
+
+    <a href="index.html" class="admin-logo">
+        <span class="logo-script">Lumière</span>
+        <span class="logo-city">Budapest — Admin</span>
+    </a>
+
+    <button class="btn-secondary" id="logoutBtn" hidden>Log Out</button>
+
+</header>
+
+
+<!-- ===========================
+     LOGIN VIEW
+=========================== -->
+
+<section class="login-view" id="loginView">
+
+    <div class="login-box">
+
+        <span class="eyebrow">Admin</span>
+
+        <h1>Sign In</h1>
+
+        <form id="loginForm">
+
+            <label for="adminPassword">Password</label>
+            <input type="password" id="adminPassword" name="adminPassword" placeholder="••••••••" required autocomplete="off">
+
+            <button type="submit" class="btn-primary">Sign In</button>
+
+            <p class="login-status" id="loginStatus"></p>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ===========================
+     DASHBOARD VIEW
+=========================== -->
+
+<section class="dashboard-view" id="dashboardView" hidden>
+
+    <div class="dashboard-topbar">
+
+        <h1>Galleries</h1>
+
+        <button class="btn-primary" id="newGalleryBtn">+ New Gallery</button>
+
+    </div>
+
+    <div class="galleries-table-wrap">
+
+        <table class="galleries-table" id="galleriesTable">
+
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Gallery</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Photos</th>
+                    <th>Selected</th>
+                    <th>Expires</th>
+                </tr>
+            </thead>
+
+            <tbody id="galleriesTableBody">
+                <!-- JS-ből töltődik -->
+            </tbody>
+
+        </table>
+
+        <div class="galleries-empty" id="galleriesEmpty" hidden>
+            No galleries yet — create your first one above.
+        </div>
+
+    </div>
+
+
+    <!-- Galéria részletek / fotófeltöltés panel -->
+    <div class="gallery-detail" id="galleryDetail" hidden>
+
+        <div class="detail-header">
+
+            <div>
+                <h2 id="detailGalleryName">—</h2>
+                <span class="detail-meta" id="detailGalleryMeta"></span>
+            </div>
+
+            <button class="btn-secondary" id="closeDetailBtn">Close</button>
+
+        </div>
+
+        <div class="upload-box">
+
+            <label for="photoUploadInput" class="upload-label">
+                <span id="uploadLabelText">Click to choose photos, or drag & drop here</span>
+            </label>
+            <input type="file" id="photoUploadInput" multiple accept="image/jpeg,image/png,image/webp" hidden>
+
+            <button class="btn-primary" id="uploadBtn" disabled>Upload Photos</button>
+
+            <p class="upload-status" id="uploadStatus"></p>
+
+        </div>
+
+        <div class="detail-photos-grid" id="detailPhotosGrid">
+            <!-- JS-ből töltődik -->
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===========================
+     NEW GALLERY MODAL
+=========================== -->
+
+<div class="modal-overlay" id="newGalleryModal" hidden>
+
+    <div class="modal-box">
+
+        <h2>New Gallery</h2>
+
+        <form id="newGalleryForm">
+
+            <label for="customerName">Customer Name *</label>
+            <input type="text" id="customerName" required>
+
+            <label for="customerEmail">Customer Email</label>
+            <input type="email" id="customerEmail">
+
+            <label for="galleryName">Gallery Name *</label>
+            <input type="text" id="galleryName" required placeholder="e.g. Ducati Session — Budapest">
+
+            <label for="galleryType">Gallery Type *</label>
+            <select id="galleryType" required>
+                <option value="selection">Selection (client picks favorites)</option>
+                <option value="final">Final (ready-to-download photos)</option>
+            </select>
+
+            <label for="expiryDays">Expires After (days)</label>
+            <input type="number" id="expiryDays" min="1" placeholder="Default: 3">
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelNewGalleryBtn">Cancel</button>
+                <button type="submit" class="btn-primary">Create Gallery</button>
+            </div>
+
+            <p class="modal-status" id="newGalleryStatus"></p>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ===========================
+     GALÉRIA LÉTREHOZVA — hozzáférési adatok (csak egyszer látszik)
+=========================== -->
+
+<div class="modal-overlay" id="accessInfoModal" hidden>
+
+    <div class="modal-box">
+
+        <h2>Gallery Created 🎉</h2>
+
+        <p class="modal-note">
+            Save this now — the password won't be shown again.
+        </p>
+
+        <div class="access-info-row">
+            <span class="access-info-label">Gallery URL</span>
+            <div class="access-info-value">
+                <code id="accessInfoUrl"></code>
+                <button class="copy-btn" data-copy-target="accessInfoUrl">Copy</button>
+            </div>
+        </div>
+
+        <div class="access-info-row">
+            <span class="access-info-label">Password</span>
+            <div class="access-info-value">
+                <code id="accessInfoPassword"></code>
+                <button class="copy-btn" data-copy-target="accessInfoPassword">Copy</button>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="closeAccessInfoBtn">Done</button>
+
+    </div>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+
+</html>
