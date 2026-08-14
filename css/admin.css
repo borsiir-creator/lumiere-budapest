@@ -27,10 +27,34 @@ button{font-family:inherit;cursor:pointer}
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:24px 6%;
-    border-bottom:1px solid rgba(255,255,255,.08);
+    padding:24px 6% 0;
+    border-bottom:none;
 }
 .admin-logo{display:inline-flex;flex-direction:column}
+
+/* TABS */
+.admin-tabs{
+    display:flex;
+    gap:4px;
+    padding:20px 6% 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    margin-bottom:0;
+}
+.admin-tab{
+    background:none;
+    border:none;
+    color:#999;
+    padding:12px 20px;
+    font-size:.9rem;
+    letter-spacing:.5px;
+    border-bottom:2px solid transparent;
+    transition:.25s;
+}
+.admin-tab:hover{color:#fff}
+.admin-tab.active{
+    color:#C8A96A;
+    border-bottom-color:#C8A96A;
+}
 .logo-script{
     font-family:"Cormorant Garamond",serif;
     font-style:italic;
@@ -352,4 +376,138 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:700px){
 .dashboard-view{padding:30px 5% 80px}
 .modal-box{padding:26px}
+}
+
+/* PORTFOLIO VIEW */
+.topbar-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+.file-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+.portfolio-subheading{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:1.4rem;
+    margin:44px 0 6px;
+}
+.portfolio-subtext{
+    color:#888;
+    font-size:.85rem;
+    margin-bottom:20px;
+}
+.optional-tag{
+    color:#888;
+    font-weight:400;
+    font-size:.9rem;
+}
+
+.portfolio-photos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+    gap:14px;
+}
+.portfolio-photo-item{
+    position:relative;
+    aspect-ratio:1;
+    overflow:hidden;
+    background:#1a1a1a;
+    border:2px solid transparent;
+}
+.portfolio-photo-item.is-unpublished{
+    opacity:.45;
+}
+.portfolio-photo-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.portfolio-photo-controls{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    opacity:0;
+    transition:.2s;
+}
+.portfolio-photo-item:hover .portfolio-photo-controls{
+    opacity:1;
+}
+.photo-ctrl-row{
+    display:flex;
+    gap:6px;
+}
+.photo-ctrl-btn{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.3);
+    color:#fff;
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.85rem;
+    transition:.2s;
+}
+.photo-ctrl-btn:hover{border-color:#C8A96A;color:#C8A96A}
+.photo-ctrl-btn.danger:hover{border-color:#e06666;color:#e06666}
+.photo-ctrl-btn.active{background:#C8A96A;color:#111;border-color:#C8A96A}
+
+/* ALBUMS TABLE */
+.albums-table-wrap{
+    overflow-x:auto;
+    border:1px solid rgba(255,255,255,.08);
+}
+.album-cover-cell{
+    width:50px;
+}
+.album-cover-cell img{
+    width:44px;
+    height:44px;
+    object-fit:cover;
+}
+.album-row-actions{
+    display:flex;
+    gap:8px;
+}
+.album-row-actions button{
+    background:none;
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;
+    padding:5px 10px;
+    font-size:.75rem;
+    transition:.2s;
+}
+.album-row-actions button:hover{border-color:#C8A96A;color:#C8A96A}
+.album-row-actions button.danger:hover{border-color:#e06666;color:#e06666}
+
+.detail-header-actions{
+    display:flex;
+    gap:10px;
+}
+
+.checkbox-label{
+    display:flex !important;
+    align-items:center;
+    gap:8px;
+    flex-direction:row !important;
+    margin-top:18px !important;
+    font-size:.85rem !important;
+    letter-spacing:0 !important;
+    text-transform:none !important;
+    color:#ccc !important;
+    cursor:pointer;
+}
+.checkbox-label input{
+    width:auto !important;
+    accent-color:#C8A96A;
 }

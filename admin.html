@@ -41,6 +41,11 @@
 
 </header>
 
+<nav class="admin-tabs" id="adminTabs" hidden>
+    <button class="admin-tab active" data-tab="galleries">Galleries</button>
+    <button class="admin-tab" data-tab="portfolio">Portfolio</button>
+</nav>
+
 
 <!-- ===========================
      LOGIN VIEW
@@ -147,6 +152,154 @@
     </div>
 
 </section>
+
+
+<!-- ===========================
+     PORTFOLIO VIEW
+=========================== -->
+
+<section class="dashboard-view" id="portfolioView" hidden>
+
+    <div class="dashboard-topbar">
+
+        <h1>Portfolio</h1>
+
+        <div class="topbar-actions">
+            <label class="btn-primary file-btn">
+                + Standalone Photo
+                <input type="file" id="standaloneUploadInput" multiple accept="image/jpeg,image/png,image/webp" hidden>
+            </label>
+            <button class="btn-primary" id="newAlbumBtn">+ New Album</button>
+        </div>
+
+    </div>
+
+    <p class="upload-status" id="standaloneUploadStatus"></p>
+
+    <h2 class="portfolio-subheading">Standalone Photos</h2>
+    <p class="portfolio-subtext">These appear directly on the public Portfolio page, not inside any album.</p>
+
+    <div class="portfolio-photos-grid" id="standalonePhotosGrid">
+        <!-- JS-ből töltődik -->
+    </div>
+
+
+    <h2 class="portfolio-subheading">Albums <span class="optional-tag">(optional)</span></h2>
+
+    <div class="albums-table-wrap">
+
+        <table class="galleries-table" id="albumsTable">
+
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Photos</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="albumsTableBody">
+                <!-- JS-ből töltődik -->
+            </tbody>
+
+        </table>
+
+        <div class="galleries-empty" id="albumsEmpty" hidden>
+            No albums yet — creating one is optional.
+        </div>
+
+    </div>
+
+
+    <!-- Album részletek panel -->
+    <div class="gallery-detail" id="albumDetail" hidden>
+
+        <div class="detail-header">
+
+            <div>
+                <h2 id="albumDetailName">—</h2>
+                <span class="detail-meta" id="albumDetailMeta"></span>
+            </div>
+
+            <div class="detail-header-actions">
+                <button class="btn-secondary" id="editAlbumBtn">Edit Details</button>
+                <button class="btn-secondary" id="closeAlbumDetailBtn">Close</button>
+            </div>
+
+        </div>
+
+        <div class="upload-box">
+
+            <label for="albumPhotoUploadInput" class="upload-label">
+                <span id="albumUploadLabelText">Click to choose photos, or drag & drop here</span>
+            </label>
+            <input type="file" id="albumPhotoUploadInput" multiple accept="image/jpeg,image/png,image/webp" hidden>
+
+            <button class="btn-primary" id="albumUploadBtn" disabled>Upload Photos</button>
+
+            <p class="upload-status" id="albumUploadStatus"></p>
+
+        </div>
+
+        <div class="portfolio-photos-grid" id="albumPhotosGrid">
+            <!-- JS-ből töltődik -->
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===========================
+     NEW / EDIT ALBUM MODAL
+=========================== -->
+
+<div class="modal-overlay" id="albumFormModal" hidden>
+
+    <div class="modal-box">
+
+        <h2 id="albumFormTitle">New Album</h2>
+
+        <form id="albumForm">
+
+            <input type="hidden" id="albumFormId">
+
+            <label for="albumTitle">Title *</label>
+            <input type="text" id="albumTitle" required placeholder="e.g. Suzuki GS500 — Budapest">
+
+            <label for="albumLocation">Location</label>
+            <input type="text" id="albumLocation" placeholder="e.g. Buda Castle">
+
+            <label for="albumDate">Date</label>
+            <input type="date" id="albumDate">
+
+            <label for="albumCategory">Category</label>
+            <input type="text" id="albumCategory" placeholder="e.g. Motorcycle, Portrait, City Tour">
+
+            <label for="albumDescription">Description</label>
+            <input type="text" id="albumDescription" placeholder="Short description">
+
+            <label class="checkbox-label">
+                <input type="checkbox" id="albumPublished">
+                Published (visible on the public site)
+            </label>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelAlbumFormBtn">Cancel</button>
+                <button type="submit" class="btn-primary" id="albumFormSubmitBtn">Create Album</button>
+            </div>
+
+            <p class="modal-status" id="albumFormStatus"></p>
+
+        </form>
+
+    </div>
+
+</div>
 
 
 <!-- ===========================
