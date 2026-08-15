@@ -4,6 +4,15 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+
+/* Biztosítja, hogy a "hidden" attribútum mindig érvényesüljön, még akkor
+   is, ha egy adott class külön display-t állít be (pl. .portfolio-grid
+   { display:grid }) — enélkül a #portfolioGrid rögtön látszódna, mielőtt
+   a JS eldöntené, van-e egyáltalán publikált tartalom. */
+[hidden]{
+    display:none !important;
+}
+
 body{
     font-family:"Inter",sans-serif;
     background:#111;
@@ -401,6 +410,32 @@ nav a:hover::after{width:100%}
     transform:scale(1.06);
 }
 
+/* ALBUM KÁRTYA — cím + fotószám overlay a borítóképen */
+.portfolio-album-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:16px;
+    background:linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,0) 60%);
+    pointer-events:none;
+}
+.portfolio-album-title{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:600;
+    font-size:1.15rem;
+    color:#fff;
+    line-height:1.2;
+}
+.portfolio-album-count{
+    margin-top:4px;
+    font-size:.72rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#C8A96A;
+}
+
 /* ÜRES PORTFOLIO HELYEK — amíg nincs feltöltött kép */
 .portfolio-placeholder{
     display:flex;
@@ -461,11 +496,25 @@ nav a:hover::after{width:100%}
 .lightbox.open{
     display:flex;
 }
+.lightbox-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    max-width:90vw;
+}
 .lightbox-image{
-    max-width:85vw;
-    max-height:85vh;
+    max-width:88vw;
+    max-height:80vh;
     object-fit:contain;
     box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox-caption{
+    font-size:.85rem;
+    letter-spacing:.5px;
+    color:#999;
+    text-align:center;
+    min-height:1.2em;
 }
 .lightbox-close,
 .lightbox-prev,

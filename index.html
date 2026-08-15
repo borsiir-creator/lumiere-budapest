@@ -264,47 +264,15 @@
 
     </div>
 
-    <!-- Amint megvannak a saját portfolió képeid, minden "portfolio-placeholder"
-         div helyére tegyél egy ilyen szerkezetet:
-         <div class="portfolio-item"><img src="assets/images/portfolio1.jpg" alt="..."></div>
-         (portfolio1.jpg, portfolio2.jpg stb. — csak másold a fájlokat az
-         assets/images/ mappába ugyanezekkel a nevekkel) -->
-    <div class="portfolio-grid">
+    <!-- A tartalom (önálló képek + album borítók) dinamikusan töltődik be
+         a js/portfolio.js-ből, a publikus /api/portfolio/public végpontról.
+         Ha még nincs publikált tartalom, ez a rács üres/rejtett marad, és
+         csak a lenti "ingyenes session" CTA blokk látszik. -->
+    <div class="portfolio-grid" id="portfolioGrid" hidden></div>
 
-        <div class="portfolio-placeholder tall reveal">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1"><rect x="4" y="14" width="40" height="26" rx="2"/><circle cx="24" cy="27" r="8"/><rect x="16" y="8" width="10" height="6" rx="1"/></svg>
-            <span>Coming Soon</span>
-        </div>
-
-        <div class="portfolio-placeholder reveal">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1"><rect x="4" y="14" width="40" height="26" rx="2"/><circle cx="24" cy="27" r="8"/><rect x="16" y="8" width="10" height="6" rx="1"/></svg>
-            <span>Coming Soon</span>
-        </div>
-
-        <div class="portfolio-placeholder reveal">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1"><rect x="4" y="14" width="40" height="26" rx="2"/><circle cx="24" cy="27" r="8"/><rect x="16" y="8" width="10" height="6" rx="1"/></svg>
-            <span>Coming Soon</span>
-        </div>
-
-        <div class="portfolio-placeholder reveal">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1"><rect x="4" y="14" width="40" height="26" rx="2"/><circle cx="24" cy="27" r="8"/><rect x="16" y="8" width="10" height="6" rx="1"/></svg>
-            <span>Coming Soon</span>
-        </div>
-
-        <div class="portfolio-placeholder tall reveal">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1"><rect x="4" y="14" width="40" height="26" rx="2"/><circle cx="24" cy="27" r="8"/><rect x="16" y="8" width="10" height="6" rx="1"/></svg>
-            <span>Coming Soon</span>
-        </div>
-
-        <div class="portfolio-placeholder reveal">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1"><rect x="4" y="14" width="40" height="26" rx="2"/><circle cx="24" cy="27" r="8"/><rect x="16" y="8" width="10" height="6" rx="1"/></svg>
-            <span>Coming Soon</span>
-        </div>
-
-    </div>
-
-    <!-- A promó blokk marad — ez magyarázza, miért "Coming Soon" a rács,
-         és ösztönzi az ingyenes session foglalását. -->
+    <!-- Ez a promó blokk MINDIG látszik — akkor is, ha már van feltöltött
+         portfolió-tartalom, mert az ingyenes session-ök hirdetése önmagában
+         is fontos marad. -->
     <div class="portfolio-building reveal">
 
         <svg class="portfolio-building-icon" viewBox="0 0 48 48" fill="none" stroke="#C8A96A" stroke-width="1.2">
@@ -466,13 +434,20 @@
 
     <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
 
-    <img src="" alt="" class="lightbox-image" id="lightboxImage">
+    <div class="lightbox-content">
+
+        <img src="" alt="" class="lightbox-image" id="lightboxImage">
+
+        <span class="lightbox-caption" id="lightboxCaption"></span>
+
+    </div>
 
     <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
 
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/portfolio.js"></script>
 
 </body>
 
