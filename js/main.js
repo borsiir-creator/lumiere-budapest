@@ -7,52 +7,69 @@
 // SCROLL REVEAL ANIMÁCIÓ
 // =======================
 
-const revealElements = document.querySelectorAll(".reveal");
+let revealObserver = null;
 
-if(revealElements.length && "IntersectionObserver" in window){
+function initReveal(elements){
 
-    // Csak most kapcsoljuk be a "rejtsd el induláskor" CSS-t — ha idáig
-    // eljutott a script, biztosan tudjuk animálni is.
-    document.documentElement.classList.add("js-ready");
+    if(!elements.length) return;
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
+    if("IntersectionObserver" in window){
 
-        entries.forEach(entry => {
+        // Csak most kapcsoljuk be a "rejtsd el induláskor" CSS-t — ha idáig
+        // eljutott a script, biztosan tudjuk animálni is.
+        document.documentElement.classList.add("js-ready");
 
-            if(entry.isIntersecting){
+        if(!revealObserver){
 
-                entry.target.classList.add("in-view");
-                observer.unobserve(entry.target);
+            revealObserver = new IntersectionObserver((entries, observer) => {
 
-            }
+                entries.forEach(entry => {
 
-        });
+                    if(entry.isIntersecting){
 
-    }, {
-        threshold: 0.15,
-        rootMargin: "0px 0px -60px 0px"
-    });
+                        entry.target.classList.add("in-view");
+                        observer.unobserve(entry.target);
 
-    revealElements.forEach(element => {
+                    }
 
-        revealObserver.observe(element);
+                });
 
-    });
+            }, {
+                threshold: 0.15,
+                rootMargin: "0px 0px -60px 0px"
+            });
 
-    // Biztonsági háló: ha bármi okból (pl. az elem sosem kerül a
-    // viewportba, vagy az observer nem indul el megfelelően) egy elem
-    // 4 másodperc után sem vált láthatóvá, kényszerítsük ki.
-    setTimeout(() => {
+        }
 
-        revealElements.forEach(element => {
+        elements.forEach(element => {
 
-            element.classList.add("in-view");
+            revealObserver.observe(element);
 
         });
 
-    }, 4000);
+        // Biztonsági háló: ha bármi okból (pl. az elem sosem kerül a
+        // viewportba, vagy az observer nem indul el megfelelően) egy elem
+        // 4 másodperc után sem vált láthatóvá, kényszerítsük ki.
+        setTimeout(() => {
+
+            elements.forEach(element => {
+
+                element.classList.add("in-view");
+
+            });
+
+        }, 4000);
+
+    }
 
 }
+
+// Elérhetővé tesszük más scripteknek is (pl. portfolio.js), hogy a
+// később, dinamikusan beszúrt .reveal elemeket is be tudják jelentkeztetni
+// ugyanebbe az observerbe.
+window.lumiereInitReveal = initReveal;
+
+initReveal(Array.from(document.querySelectorAll(".reveal")));
 
 // =======================
 // HAMBURGER MENU (mobil)

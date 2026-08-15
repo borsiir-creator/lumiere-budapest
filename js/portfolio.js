@@ -82,6 +82,19 @@ function renderGrid(standalonePhotos, albums) {
 
     portfolioGrid.innerHTML = html;
 
+    // Az újonnan beszúrt .reveal elemeket be kell jelentkeztetni a
+    // main.js scroll-reveal observerébe, különben opacity:0 marad
+    // (a main.js induláskor csak a már akkor létező .reveal elemeket
+    // látja, ezek a képek pedig csak most, a fetch visszatérése után
+    // kerülnek a DOM-ba).
+    if (typeof window.lumiereInitReveal === "function") {
+        window.lumiereInitReveal(Array.from(portfolioGrid.querySelectorAll(".reveal")));
+    } else {
+        // Ha valamiért nem elérhető az observer-inicializáló, ne
+        // vesszen el a tartalom — legyen egyszerűen látható animáció nélkül.
+        portfolioGrid.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
+    }
+
     // Kattintás-kezelők
     portfolioGrid.querySelectorAll('[data-type="standalone"]').forEach((el) => {
 
