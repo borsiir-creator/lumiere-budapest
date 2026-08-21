@@ -20,7 +20,7 @@ body{
 }
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;background:none;border:none;appearance:none}
 
 /* HEADER */
 .admin-header{
