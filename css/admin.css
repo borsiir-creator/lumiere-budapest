@@ -89,14 +89,15 @@ button{font-family:inherit;cursor:pointer}
     border:1px solid #C8A96A;
     font-weight:600;
     font-size:.9rem;
-    transition:.3s;
+    transition:.35s;
     white-space:nowrap;
 }
 .btn-primary{background:#C8A96A;color:#111}
-.btn-primary:hover{background:transparent;color:#fff}
+.btn-primary:hover{background:transparent;color:#fff;transform:translateY(-4px)}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary:disabled:hover{transform:none}
 .btn-secondary{color:#fff}
-.btn-secondary:hover{background:#C8A96A;color:#111}
+.btn-secondary:hover{background:#C8A96A;color:#111;transform:translateY(-4px)}
 
 /* LOGIN VIEW */
 .login-view{

@@ -691,6 +691,11 @@ nav a:hover::after{width:100%}
 .info-item a:hover{
     color:#C8A96A;
 }
+.info-links{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
 @media(max-width:900px){
 .contact{padding:100px 6% 110px}
 .contact-wrapper{
