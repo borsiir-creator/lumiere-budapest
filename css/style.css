@@ -13,11 +13,54 @@ html{scroll-behavior:smooth}
     display:none !important;
 }
 
+/* ==========================================
+   THEME TOKENS — sötét (alapértelmezett) és világos
+   téma. A Hero szekció és a Lightbox szándékosan
+   mindkét témában sötét marad (fotó-háttér miatt).
+========================================== */
+:root{
+    --bg:#111;
+    --bg-alt:#0d0d0d;
+    --bg-card:#1a1a1a;
+    --text:#fff;
+    --text-secondary:#ccc;
+    --text-body:#bbb;
+    --text-muted:#999;
+    --text-faint:#888;
+    --border-soft:rgba(255,255,255,.08);
+    --border-med:rgba(255,255,255,.1);
+    --border-strong:rgba(255,255,255,.2);
+    --navbar-bg:rgba(0,0,0,.25);
+    --navbar-bg-scrolled:rgba(15,15,15,.9);
+    --mobile-nav-bg:rgba(15,15,15,.97);
+    --placeholder-color:#888;
+    --accent:#C8A96A;
+    --accent-contrast:#111;
+}
+:root[data-theme="light"]{
+    --bg:#faf8f4;
+    --bg-alt:#f1ede5;
+    --bg-card:#e9e3d8;
+    --text:#1a1712;
+    --text-secondary:#3a352c;
+    --text-body:#514b3f;
+    --text-muted:#6b6355;
+    --text-faint:#847c6c;
+    --border-soft:rgba(0,0,0,.08);
+    --border-med:rgba(0,0,0,.12);
+    --border-strong:rgba(0,0,0,.2);
+    --navbar-bg:rgba(250,248,244,.55);
+    --navbar-bg-scrolled:rgba(250,248,244,.92);
+    --mobile-nav-bg:rgba(250,248,244,.97);
+    --placeholder-color:#7a7264;
+}
+
 body{
     font-family:"Inter",sans-serif;
-    background:#111;
-    color:#fff;
+    background:var(--bg);
+    color:var(--text);
     overflow-x:hidden;
+    transition:background .35s,color .35s;
 }
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
@@ -32,14 +75,16 @@ a{text-decoration:none;color:inherit}
     align-items:center;
     padding:28px 80px;
     z-index:1000;
-    background:rgba(0,0,0,.25);
+    background:var(--navbar-bg);
     backdrop-filter:blur(16px);
     transition:.35s;
+    color:#fff;
 }
 .navbar.scrolled{
-    background:rgba(15,15,15,.9);
+    background:var(--navbar-bg-scrolled);
     padding:18px 80px;
     box-shadow:0 10px 30px rgba(0,0,0,.35);
+    color:var(--text);
 }
 .logo{display:flex;flex-direction:column}
 .logo-script{
@@ -71,14 +116,41 @@ nav a:hover{color:#C8A96A}
 nav a:hover::after{width:100%}
 .button{
     padding:14px 30px;
-    border:1px solid #C8A96A;
-    color:#C8A96A;
+    border:1px solid var(--accent);
+    color:var(--accent);
     transition:.3s;
 }
 .button:hover{
-    background:#C8A96A;
-    color:#111;
+    background:var(--accent);
+    color:var(--accent-contrast);
 }
+
+/* TÉMA VÁLTÓ GOMB */
+.theme-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    margin-left:18px;
+    border:1px solid var(--accent);
+    background:none;
+    color:var(--accent);
+    cursor:pointer;
+    transition:.3s;
+    flex-shrink:0;
+}
+.theme-toggle:hover{
+    background:var(--accent);
+    color:var(--accent-contrast);
+}
+.theme-toggle svg{
+    width:18px;
+    height:18px;
+}
+.theme-toggle .icon-moon{display:none}
+[data-theme="light"] .theme-toggle .icon-sun{display:none}
+[data-theme="light"] .theme-toggle .icon-moon{display:block}
 
 /* HAMBURGER (mobil menü gomb) */
 .hamburger{
@@ -93,7 +165,7 @@ nav a:hover::after{width:100%}
     display:block;
     width:100%;
     height:2px;
-    background:#fff;
+    background:currentColor;
     transition:.3s;
 }
 .hamburger.open span:nth-child(1){
@@ -118,7 +190,8 @@ nav a:hover::after{width:100%}
         align-items:flex-start;
         gap:32px;
         padding:0 48px;
-        background:rgba(15,15,15,.97);
+        background:var(--mobile-nav-bg);
+        color:var(--text);
         transform:translateX(100%);
         transition:.4s ease;
         z-index:1050;
@@ -187,6 +260,8 @@ nav a:hover::after{width:100%}
     z-index:5;
     padding-left:10%;
     max-width:760px;
+    color:#fff;
+}
 }
 .eyebrow{
     display:block;
@@ -237,8 +312,11 @@ nav a:hover::after{width:100%}
 }
 .btn-primary:hover{
     background:transparent;
-    color:#fff;
+    color:var(--text);
     transform:translateY(-4px);
+}
+.hero-buttons .btn-primary:hover{
+    color:#fff;
 }
 .btn-secondary{
     color:#fff;
@@ -276,7 +354,7 @@ nav a:hover::after{width:100%}
 /* SERVICES */
 .services{
     padding:140px 10% 120px;
-    background:#0d0d0d;
+    background:var(--bg-alt);
 }
 .section-head{
     text-align:center;
@@ -304,17 +382,17 @@ nav a:hover::after{width:100%}
 .service-card{
     text-align:center;
     padding:50px 30px;
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid var(--border-soft);
     transition:.35s;
 }
 .service-card:hover{
-    border-color:#C8A96A;
+    border-color:var(--accent);
     transform:translateY(-6px);
 }
 .service-icon{
     width:48px;
     height:48px;
-    color:#C8A96A;
+    color:var(--accent);
     margin-bottom:28px;
 }
 .service-card h3{
@@ -324,7 +402,7 @@ nav a:hover::after{width:100%}
     margin-bottom:16px;
 }
 .service-card p{
-    color:#bbb;
+    color:var(--text-body);
     line-height:1.7;
     font-size:.95rem;
 }
@@ -336,7 +414,7 @@ nav a:hover::after{width:100%}
 /* PORTFOLIO */
 .portfolio{
     padding:20px 10% 150px;
-    background:#0d0d0d;
+    background:var(--bg-alt);
 }
 
 /* PORTFÓLIÓ ÉPÍTÉSE ALATT — ideiglenes felhívás kép-rács helyett */
@@ -345,7 +423,7 @@ nav a:hover::after{width:100%}
     margin:0 auto;
     text-align:center;
     padding:70px 50px;
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid var(--border-med);
     background:rgba(200,169,106,.04);
 }
 .portfolio-building-icon{
@@ -358,16 +436,16 @@ nav a:hover::after{width:100%}
     font-weight:600;
     font-size:clamp(1.6rem,3vw,2.1rem);
     margin-bottom:20px;
-    color:#fff;
+    color:var(--text);
 }
 .portfolio-building p{
-    color:#bbb;
+    color:var(--text-body);
     line-height:1.8;
     margin-bottom:34px;
     font-size:1rem;
 }
 .portfolio-building p strong{
-    color:#C8A96A;
+    color:var(--accent);
     font-weight:600;
 }
 @media(max-width:600px){
@@ -383,7 +461,7 @@ nav a:hover::after{width:100%}
     position:relative;
     overflow:hidden;
     cursor:pointer;
-    background:#1a1a1a;
+    background:var(--bg-card);
     break-inside:avoid;
     margin-bottom:14px;
 }
@@ -430,7 +508,7 @@ nav a:hover::after{width:100%}
     font-size:.72rem;
     letter-spacing:1px;
     text-transform:uppercase;
-    color:#C8A96A;
+    color:var(--accent);
 }
 
 /* ÜRES PORTFOLIO HELYEK — amíg nincs feltöltött kép */
@@ -441,7 +519,7 @@ nav a:hover::after{width:100%}
     justify-content:center;
     gap:14px;
     border:1px dashed rgba(200,169,106,.35);
-    background:rgba(255,255,255,.015);
+    background:rgba(200,169,106,.02);
     transition:.35s;
 }
 .portfolio-placeholder.tall{
@@ -456,11 +534,11 @@ nav a:hover::after{width:100%}
     font-size:.75rem;
     letter-spacing:2px;
     text-transform:uppercase;
-    color:#888;
+    color:var(--text-faint);
 }
 .portfolio-placeholder:hover{
     border-color:#C8A96A;
-    background:rgba(200,169,106,.04);
+    background:rgba(200,169,106,.06);
 }
 .portfolio-placeholder:hover svg{
     opacity:1;
@@ -553,7 +631,7 @@ nav a:hover::after{width:100%}
     gap:80px;
     align-items:center;
     padding:130px 10%;
-    background:#111;
+    background:var(--bg);
 }
 .about-image{
     aspect-ratio:4/5;
@@ -574,7 +652,7 @@ nav a:hover::after{width:100%}
     line-height:1.15;
 }
 .about-content p{
-    color:#ccc;
+    color:var(--text-secondary);
     line-height:1.8;
     margin-bottom:20px;
     max-width:520px;
@@ -591,13 +669,13 @@ nav a:hover::after{width:100%}
 .stat-number{
     font-family:"Cormorant Garamond",serif;
     font-size:2.4rem;
-    color:#C8A96A;
+    color:var(--accent);
     line-height:1;
 }
 .stat-label{
     margin-top:8px;
     font-size:.8rem;
-    color:#999;
+    color:var(--text-muted);
     letter-spacing:.5px;
 }
 @media(max-width:900px){
@@ -612,7 +690,7 @@ nav a:hover::after{width:100%}
 /* CONTACT */
 .contact{
     padding:130px 10% 150px;
-    background:#0d0d0d;
+    background:var(--bg-alt);
 }
 .contact-wrapper{
     display:grid;
@@ -635,8 +713,8 @@ nav a:hover::after{width:100%}
 .contact-form textarea{
     background:transparent;
     border:none;
-    border-bottom:1px solid rgba(255,255,255,.2);
-    color:#fff;
+    border-bottom:1px solid var(--border-strong);
+    color:var(--text);
     padding:12px 4px;
     font-family:"Inter",sans-serif;
     font-size:.95rem;
@@ -645,24 +723,24 @@ nav a:hover::after{width:100%}
 }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder{
-    color:#888;
+    color:var(--placeholder-color);
 }
 .contact-form input:focus,
 .contact-form textarea:focus{
     outline:none;
-    border-bottom-color:#C8A96A;
+    border-bottom-color:var(--accent);
 }
 .contact-form .btn-primary{
     margin-top:10px;
     align-self:flex-start;
     min-width:200px;
-    border:1px solid #C8A96A;
+    border:1px solid var(--accent);
     cursor:pointer;
     font-family:"Inter",sans-serif;
 }
 .form-status{
     font-size:.85rem;
-    color:#C8A96A;
+    color:var(--accent);
     min-height:20px;
 }
 .contact-info{
@@ -670,7 +748,7 @@ nav a:hover::after{width:100%}
     flex-direction:column;
     gap:32px;
     padding-left:20px;
-    border-left:1px solid rgba(255,255,255,.08);
+    border-left:1px solid var(--border-soft);
 }
 .info-item{
     display:flex;
@@ -681,15 +759,15 @@ nav a:hover::after{width:100%}
     font-size:.75rem;
     letter-spacing:2px;
     text-transform:uppercase;
-    color:#999;
+    color:var(--text-muted);
 }
 .info-item a{
-    color:#fff;
+    color:var(--text);
     transition:.3s;
     font-size:1.05rem;
 }
 .info-item a:hover{
-    color:#C8A96A;
+    color:var(--accent);
 }
 .info-links{
     display:flex;
@@ -704,7 +782,7 @@ nav a:hover::after{width:100%}
 }
 .contact-info{
     border-left:none;
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:1px solid var(--border-soft);
     padding-left:0;
     padding-top:30px;
     flex-direction:row;

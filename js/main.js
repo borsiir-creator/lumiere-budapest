@@ -4,6 +4,38 @@
 ========================================== */
 
 // =======================
+// TÉMA VÁLTÓ (sötét/világos)
+// =======================
+// A mentett preferenciát a <head>-ben lévő inline script már beállította
+// betöltéskor (villanás-mentesen) — itt csak a kattintás-logikát kötjük be.
+
+const themeToggle = document.getElementById("themeToggle");
+
+if(themeToggle){
+
+    themeToggle.addEventListener("click", () => {
+
+        const isLight = document.documentElement.getAttribute("data-theme") === "light";
+
+        if(isLight){
+
+            document.documentElement.removeAttribute("data-theme");
+
+            try{ localStorage.setItem("lumiereTheme", "dark"); }catch(e){}
+
+        } else {
+
+            document.documentElement.setAttribute("data-theme", "light");
+
+            try{ localStorage.setItem("lumiereTheme", "light"); }catch(e){}
+
+        }
+
+    });
+
+}
+
+// =======================
 // SCROLL REVEAL ANIMÁCIÓ
 // =======================
 
